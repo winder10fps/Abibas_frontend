@@ -1,0 +1,18 @@
+:root {
+  --color-background: #000;
+  --color-dark: #111414;
+  --color-accent: #FF692E;
+  --color-secondary: #3c4242;
+  --color-light: #fff;
+  --color-foreground: #a6adab;
+
+  --first-family: 'Roboto', sans-serif;
+  --second-family: 'Oswald', sans-serif;
+
+  --border-accent: 1px solid var(--color-accent);
+  --border-secondary: 1px solid var(--color-secondary);
+
+  --transition-medium: .5s;
+  --transition-fast: .3s;
+  --transition-slow: 1s;
+}
