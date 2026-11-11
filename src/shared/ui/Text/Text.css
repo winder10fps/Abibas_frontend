@@ -1,0 +1,33 @@
+.text {
+  font-family: var(--first-family);
+}
+
+
+.text.big {
+  font-size: 20px;
+}
+
+.text.default {
+  font-size: 16px;
+}
+
+.text.mini {
+  font-size: 14px;
+}
+
+.text.micro {
+  font-size: 12px;
+}
+
+
+.text.foreground{
+  color: var(--color-foreground)
+}
+
+.text.light{
+  color: var(--color-light)
+}
+
+.text.accent {
+  color: var(--color-accent)
+}
