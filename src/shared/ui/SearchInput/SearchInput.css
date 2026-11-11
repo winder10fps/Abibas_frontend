@@ -1,0 +1,33 @@
+.search-input-wrapper {
+  border: var(--border-secondary);
+  max-width: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input-field {
+  background-color: var(--color-dark);
+  height: 46px;
+  width: 100%;
+  padding: 0 48px;
+}
+
+.search-input-wrapper:focus-within {
+  border-color: var(--color-accent);
+}
+
+.search-input-icon {
+  position: absolute;
+  left: 16px;
+}
+
+.search-input-close {
+  position: absolute;
+  right: 16px;
+  transition: all var(--transition-fast);
+}
+
+.search-input-close:hover {
+  opacity: .8;
+}

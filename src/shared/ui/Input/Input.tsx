@@ -1,21 +1,22 @@
-import { forwardRef, useState, type ComponentPropsWithoutRef } from 'react'
+import { useState, type ComponentPropsWithRef } from 'react'
 import { Text } from '@/shared/ui'
 import './Input.css'
 
-type InputProps = ComponentPropsWithoutRef<'input'> & {
+type InputProps = ComponentPropsWithRef<'input'> & {
   id: string
   label?: string
   errorMessage?: string
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({
+export const Input = ({
   label,
   type = 'text',
   errorMessage,
   className = '',
   id,
+  ref,
   ...props
-}, ref) => {
+}: InputProps) => {
   const textStyle = 'text default light'
 
   const [showPassword, setShowPassword] = useState(false)
@@ -62,4 +63,3 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
     </div>
   )
 }
-)
