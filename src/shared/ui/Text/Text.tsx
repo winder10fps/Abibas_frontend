@@ -13,11 +13,7 @@ export const Text = ({
   children
 }: TextProps) => {
   return (
-    <span className={`
-      text 
-      ${size} 
-      ${color}
-    `}>
+    <span className={`text ${size} ${color}`}>
       {children}
     </span>
   )

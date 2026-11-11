@@ -1,0 +1,32 @@
+.input {
+  padding: 16px;
+  background-color: var(--color-background);
+  border: var(--border-secondary);
+  width: 100%;
+}
+
+.input:focus {
+  border-color: var(--color-foreground)
+}
+
+.input.errored {
+  border-color: var(--color-accent);
+}
+
+.above-input-text {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+
+.input-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.show-password-btn {
+  position: absolute;
+  right: 16px;
+}
