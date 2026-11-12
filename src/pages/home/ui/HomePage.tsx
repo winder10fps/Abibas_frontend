@@ -1,4 +1,4 @@
-import { Checkbox, Input, Radio, SearchInput, SizeSelector, Stepper, Text } from "@/shared/ui"
+import { Checkbox, Input, Radio, RangeSlider, SearchInput, SizeSelector, Stepper, Text } from "@/shared/ui"
 import { useRef, useState } from "react"
 
 export const HomePage = () => {
@@ -6,6 +6,7 @@ export const HomePage = () => {
   const [query, setQuery] = useState('');
   const [sizeSelected, setSizeSelected] = useState(false)
   const [count, setCount] = useState(1)
+  const [range, setRange] = useState({ min: 0, max: 20000 });
 
   return (
     <>
@@ -26,6 +27,13 @@ export const HomePage = () => {
         maxQuantity={32}
         onIncrease={() => setCount((prev) => prev + 1)}
         onDecrease={() => setCount((prev) => prev - 1)}
+      />
+      <RangeSlider
+        min={range.min}
+        max={range.max}
+        step={100}
+        minGap={500}
+        onChange={setRange}
       />
     </>
   )
