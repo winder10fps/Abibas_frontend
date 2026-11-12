@@ -3,11 +3,11 @@ import './Button.css'
 
 type ButtonProps = {
   children: ReactNode
-  className?: string
-  variant: 'primary' | 'secondary'
+  variant: 'primary' | 'secondary' | 'text'
   type: 'button' | 'submit'
-  disabled?: boolean
   onClick: () => void
+  className?: string
+  disabled?: boolean
 }
 
 export const Button = ({

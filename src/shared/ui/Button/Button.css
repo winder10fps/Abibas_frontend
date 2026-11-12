@@ -1,4 +1,5 @@
-.button {
+.button.primary,
+.button.secondary {
   font-family: var(--second-family);
   font-size: 18px;
   padding: 14px 30px;
@@ -59,4 +60,20 @@
 
 .button.secondary:disabled {
   opacity: .4;
+}
+
+
+/* text */
+.button.text {
+  font-size: 14px;
+  color: var(--color-accent);
+  transition: color var(--transition-super-fast);
+}
+
+.button.text:hover {
+  color: #E06100;
+}
+
+.button.text:active {
+  color: #C84E1B;
 }
