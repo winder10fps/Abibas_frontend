@@ -1,0 +1,20 @@
+.size-selector {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  min-height: 44px;
+  border: var(--border-secondary);
+  text-transform: uppercase;
+  transition: all var(--transition-fast);
+}
+
+.size-selector-native {
+  width: 0;
+  height: 0;
+}
+
+.size-selector:has(.size-selector-native:checked) {
+  background-color: var(--color-accent);
+  border: var(--border-accent);
+}

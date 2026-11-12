@@ -3,7 +3,7 @@ import './Text.css'
 
 type TextProps = {
   size: 'big' | 'default' | 'mini' | 'micro'
-  color: 'foreground' | 'light' | 'accent'
+  color: 'foreground' | 'light' | 'accent' | 'background' | 'secondary'
   children: ReactNode
   className?: string
 }
