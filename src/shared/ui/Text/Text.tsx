@@ -5,15 +5,17 @@ type TextProps = {
   size: 'big' | 'default' | 'mini' | 'micro'
   color: 'foreground' | 'light' | 'accent'
   children: ReactNode
+  className?: string
 }
 
 export const Text = ({
   size,
   color,
-  children
+  children,
+  className = ''
 }: TextProps) => {
   return (
-    <span className={`text ${size} ${color}`}>
+    <span className={`text ${size} ${color} ${className}`}>
       {children}
     </span>
   )

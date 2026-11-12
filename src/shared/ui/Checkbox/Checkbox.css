@@ -1,7 +1,6 @@
 .checkbox {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 12px;
   cursor: pointer;
 }
 
@@ -17,6 +16,8 @@
   border: var(--border-secondary);
   display: inline-flex;
   border-radius: 3px;
+  margin-right: 12px;
+  
 }
 
 .checkbox .checkmark-icon {
@@ -30,7 +31,8 @@
   opacity: 1;
 }
 
-.checkbox-native:checked+.checkbox-custom {
+.checkbox-native:checked+.checkbox-custom,
+.checkbox.errored .checkbox-custom {
   border-color: var(--color-accent);
 }
 
@@ -41,4 +43,8 @@
 .checkbox:hover .checkbox-native:checked+.checkbox-custom {
   border-color: var(--color-accent);
   opacity: .9;
+}
+
+.checkbox.errored span {
+  color: var(--color-accent);
 }
