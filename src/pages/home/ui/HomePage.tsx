@@ -1,10 +1,11 @@
-import { Checkbox, Input, Radio, SearchInput, SizeSelector, Text } from "@/shared/ui"
+import { Checkbox, Input, Radio, SearchInput, SizeSelector, Stepper, Text } from "@/shared/ui"
 import { useRef, useState } from "react"
 
 export const HomePage = () => {
   const ref = useRef<HTMLInputElement>(null)
   const [query, setQuery] = useState('');
   const [sizeSelected, setSizeSelected] = useState(false)
+  const [count, setCount] = useState(1)
 
   return (
     <>
@@ -18,6 +19,13 @@ export const HomePage = () => {
         size="s"
         checked={sizeSelected}
         onChange={() => setSizeSelected(!sizeSelected)}
+      />
+      <div></div>
+      <Stepper
+        quantity={count}
+        maxQuantity={32}
+        onIncrease={() => setCount((prev) => prev + 1)}
+        onDecrease={() => setCount((prev) => prev - 1)}
       />
     </>
   )

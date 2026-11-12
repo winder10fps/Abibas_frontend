@@ -1,0 +1,29 @@
+.stepper {
+  border: var(--border-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 128px;
+  height: 48px;
+  user-select: none;
+}
+
+.stepper-button {
+  padding: 16px;
+}
+
+.stepper-button:disabled span {
+  color: var(--color-foreground);
+}
+
+.stepper-button:disabled {
+  pointer-events: none;
+}
+
+.stepper-button:hover span {
+  color: var(--color-accent)
+}
+
+.stepper-button:active span {
+  opacity: .8;
+}
