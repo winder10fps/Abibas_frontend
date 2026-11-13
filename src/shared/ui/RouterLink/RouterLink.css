@@ -1,0 +1,23 @@
+.router-link {
+  transition: all var(--transition-fast);
+}
+
+.router-link.active {
+  transform: translateY(-5px);
+  position: relative;
+}
+
+.router-link.active::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--color-accent);
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+}
+
+.router-link:hover {
+  opacity: .9;
+}

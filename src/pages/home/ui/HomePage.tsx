@@ -1,9 +1,7 @@
-import { Button, Checkbox, Input, Logo, Radio, RangeSlider, SearchInput, SizeSelector, Stepper, Text } from "@/shared/ui"
-import { useRef, useState } from "react"
+import { Button, Checkbox, Input, Logo, Radio, RangeSlider, SizeSelector, Stepper, Text } from "@/shared/ui"
+import { useState } from "react"
 
 export const HomePage = () => {
-  const ref = useRef<HTMLInputElement>(null)
-  const [query, setQuery] = useState('');
   const [sizeSelected, setSizeSelected] = useState(false)
   const [count, setCount] = useState(1)
   const [range, setRange] = useState({ min: 0, max: 20000 });
@@ -13,7 +11,7 @@ export const HomePage = () => {
       <h1>Home</h1>
       <Text size="micro" color="foreground">text</Text>
       <Input id="input" label="Инпут" placeholder="г. Москва" type="password" errorMessage="dwce" />
-      <SearchInput ref={ref} value={query} onChange={(e) => setQuery(e.target.value)} onClear={() => setQuery('')} />
+      
       <Checkbox label="checkbox" />
       <Radio label="radio" />
       <SizeSelector

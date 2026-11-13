@@ -1,13 +1,13 @@
 import { NavLink } from 'react-router-dom'
-import './IconLink.css'
+import './IconRouterLink.css'
 
-type IconLinkProps = {
+type IconRouterLinkProps = {
   to: string
   iconPath: string
   alt: string
 }
 
-export const IconLink = ({ to, iconPath, alt }: IconLinkProps) => {
+export const IconRouterLink = ({ to, iconPath, alt }: IconRouterLinkProps) => {
   return (
     <NavLink to={to} className='icon-link'>
       <img src={iconPath} alt={alt} className='icon-link__icon'/>

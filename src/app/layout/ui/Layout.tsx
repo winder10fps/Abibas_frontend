@@ -1,12 +1,11 @@
 import { Outlet } from 'react-router-dom'
 import './Layout.css'
-import { IconLink } from '@/shared/ui'
+import { Header } from '@/widgets/header'
 
 export const Layout = () => {
   return (
     <div className='layout'>
-      {/* header */}
-      <IconLink to="/profile" iconPath="/icons/profile.svg" alt="👤"/>
+      <Header />
       <main className="layout-content">
         <Outlet />
       </main>
