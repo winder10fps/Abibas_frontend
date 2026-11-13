@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input, Radio, RangeSlider, SearchInput, SizeSelector, Stepper, Text } from "@/shared/ui"
+import { Button, Checkbox, Input, Logo, Radio, RangeSlider, SearchInput, SizeSelector, Stepper, Text } from "@/shared/ui"
 import { useRef, useState } from "react"
 
 export const HomePage = () => {
@@ -36,6 +36,8 @@ export const HomePage = () => {
         onChange={setRange}
       />
       <Button type="button" variant="text" onClick={() => {}}>button</Button>
+      <Logo/>
+      <div></div>
     </>
   )
 }

@@ -1,0 +1,21 @@
+.icon-link {
+  background-color: var(--color-dark);
+  border: var(--border-secondary);
+  padding: 12px;
+  display: inline-flex;
+  transition: all var(--transition-fast);
+}
+
+.icon-link__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-link.active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.icon-link:hover {
+  border-color: var(--color-accent);
+}
