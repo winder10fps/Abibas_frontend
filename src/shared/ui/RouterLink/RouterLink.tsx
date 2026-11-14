@@ -5,7 +5,7 @@ import './RouterLink.css'
 
 type RouterLinkProps = {
   to: string
-  children: ReactNode
+  children: ReactNode,
 }
 
 export const RouterLink = ({

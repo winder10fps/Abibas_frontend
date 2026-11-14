@@ -1,18 +1,15 @@
-import { type ReactNode } from 'react'
+import { type ComponentPropsWithRef } from 'react'
 import './Button.css'
 
-type ButtonProps = {
-  children: ReactNode
+type ButtonProps = ComponentPropsWithRef<'button'> & {
   variant: 'primary' | 'secondary' | 'text'
   type: 'button' | 'submit'
-  onClick: () => void
-  className?: string
-  disabled?: boolean
 }
 
 export const Button = ({
   children,
-  className,
+  id = '',
+  className = '',
   variant,
   type,
   disabled,
@@ -26,6 +23,7 @@ export const Button = ({
 
   return (
     <button
+      id={id}
       className={styles}
       type={type}
       disabled={disabled}

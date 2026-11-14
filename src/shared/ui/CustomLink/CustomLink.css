@@ -1,0 +1,7 @@
+.custom-link {
+  transition: all var(--transition-fast)
+}
+
+.custom-link:hover {
+  opacity: .9;
+}

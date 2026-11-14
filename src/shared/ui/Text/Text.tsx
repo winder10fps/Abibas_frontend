@@ -1,16 +1,16 @@
 import { type ReactNode } from 'react'
 import './Text.css'
 
-type TextProps = {
-  size: 'big' | 'default' | 'mini' | 'micro'
-  color: 'foreground' | 'light' | 'accent' | 'background' | 'secondary'
+export type TextProps = {
   children: ReactNode
   className?: string
+  size?: 'big' | 'default' | 'mini' | 'micro'
+  color?: 'foreground' | 'light' | 'accent' | 'background' | 'secondary'
 }
 
 export const Text = ({
-  size,
-  color,
+  size = 'default',
+  color = 'light',
   children,
   className = ''
 }: TextProps) => {

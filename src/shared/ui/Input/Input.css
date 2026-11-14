@@ -1,6 +1,6 @@
 .input {
   padding: 16px;
-  background-color: var(--color-background);
+  background-color: transparent;
   border: var(--border-secondary);
   width: 100%;
 }
@@ -16,9 +16,12 @@
 .above-input-text {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
 }
 
+.input-label,
+.input-error {
+    margin-bottom: 8px;
+}
 
 .input-field-wrapper {
   position: relative;

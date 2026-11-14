@@ -32,7 +32,7 @@ export const Input = ({
           </label>
         }
         {errorMessage &&
-          <Text size='micro' color='accent'>
+          <Text size='micro' color='accent' className='input-error'>
             {errorMessage}
           </Text>
         }
