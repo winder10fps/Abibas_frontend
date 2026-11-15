@@ -11,7 +11,7 @@ export const Header = () => {
   const handleSearch = () => {
     const trimmedQuery = searchQuery.trim()
     if (!trimmedQuery) return
-    
+
     navigate(`/catalog/search=${encodeURIComponent(trimmedQuery)}`)
     console.log(searchQuery);
   }
@@ -40,7 +40,7 @@ export const Header = () => {
 
       <nav className='header-nav-icons'>
         <IconRouterLink to='/cart' iconPath='/icons/cart.svg' alt='🛒' />
-        <IconRouterLink to='/profile' iconPath='/icons/profile.svg' alt='👤' />
+        <IconRouterLink to={'/profile'} iconPath='/icons/profile.svg' alt='👤' />
       </nav>
     </header>
   )
