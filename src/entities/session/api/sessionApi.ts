@@ -9,6 +9,6 @@ export type UserProfile = {
 }
 
 export const getMeRequest = async (): Promise<UserProfile> => {
-  const response = await api.get<UserProfile>('/users/me')
+  const response = await api.get<UserProfile>('/auth/me')
   return response.data
 }

@@ -9,6 +9,11 @@ export const ProfilePage = () => {
   }
 
   return (
-    <div>{user?.firstName}</div>
+    <div>
+      <div>{user?.firstName}</div>
+      <div>{user?.lastName}</div>
+      <div>{user?.email}</div>
+      <div>{user?.phoneNum}</div>
+    </div>
   )
 }

@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuth, setIsAuth] = useState<boolean>(() => Boolean(tokenStorage.getToken()));
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const login = useCallback((token: string, userData?: UserProfile) => {
+  const login = useCallback((token: string, userData: UserProfile) => {
     tokenStorage.setToken(token);
     setIsAuth(true);
     if (userData) {

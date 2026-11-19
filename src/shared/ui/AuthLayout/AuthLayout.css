@@ -1,0 +1,10 @@
+.auth-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 480px;
+  background-color: var(--color-dark);
+  border: var(--border-secondary);
+  padding: 40px;
+  margin: 0 auto;
+}
