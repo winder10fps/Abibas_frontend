@@ -3,12 +3,15 @@ import './styles/globals.css'
 import './styles/variables.css'
 import { AppRouter } from './router'
 import { AuthProvider } from '@/entities/session'
+import { StrictMode } from 'react'
 
 function App() {
   return (
-    <AuthProvider>
-      <AppRouter />
-    </AuthProvider>
+    <StrictMode>
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
+    </StrictMode>
   )
 }
 

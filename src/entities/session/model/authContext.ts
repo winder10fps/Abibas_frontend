@@ -5,7 +5,7 @@ type AuthContextType = {
   user: UserProfile | null
   isAuth: boolean
   isLoading: boolean
-  login: (token: string, userData: UserProfile) => void
+  login: (token: string, userData: UserProfile, rememberMe: boolean) => void
   logout: () => void
 }
 
