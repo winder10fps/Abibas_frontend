@@ -6,9 +6,15 @@ export type FieldType =
   | 'cardNumber'
   | 'mmyy'
   | 'cvv'
+  | 'checkbox'
 
-export const validateField = (type: FieldType, value: string): string | undefined => {
-  const trimmed = value.trim()
+export const validateField = (type: FieldType, value: string | boolean): string | undefined => {
+  if (type === 'checkbox') {
+    return value ? undefined : 'Необходимо принять условия'
+  }
+
+  const strValue = String(value)
+  const trimmed = strValue.trim()
 
   switch (type) {
     case 'email': {
@@ -20,14 +26,14 @@ export const validateField = (type: FieldType, value: string): string | undefine
     }
 
     case 'password': {
-      if (!value) return 'Введите пароль'
-      if (value.length < 8) return 'Пароль должен быть не короче 8 символов'
+      if (!strValue) return 'Введите пароль'
+      if (strValue.length < 8) return 'Пароль должен быть не короче 8 символов'
       return undefined
     }
 
     case 'name': {
-      if (!trimmed) return 'Введите имя'
-      if (trimmed.length < 2) return 'Имя должно содержать минимум 2 символа'
+      if (!trimmed) return 'Поле не может быть пустым'
+      if (trimmed.length < 2) return 'Поле должно содержать минимум 2 символа'
       if (!/^[a-zA-Zа-яА-ЯёЁ\s-]+$/.test(trimmed)) {
         return 'Имя может содержать буквы, пробел и дефис'
       }

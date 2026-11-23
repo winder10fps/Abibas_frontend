@@ -53,7 +53,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <form className="login-form" onSubmit={handleLogin} noValidate>
+    <form className="auth-form" onSubmit={handleLogin} noValidate>
       <Input
         id="login-email"
         label='Адрес электронной почты'

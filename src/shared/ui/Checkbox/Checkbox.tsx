@@ -32,7 +32,7 @@ export const Checkbox = ({
         <img src="/icons/checkbox.svg" className='checkmark-icon' />
       </span>
 
-      <Text color='light' size='default'>{label}</Text>
+      <Text color='light' size='mini'>{label}</Text>
     </label>
   )
 }
