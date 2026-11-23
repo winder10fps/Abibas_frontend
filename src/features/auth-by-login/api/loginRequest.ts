@@ -3,7 +3,8 @@ import { api } from "@/shared/api"
 
 type LoginRequest = {
   email: string,
-  password: string
+  password: string,
+  rememberMe: boolean
 }
 
 type LoginResponse = {

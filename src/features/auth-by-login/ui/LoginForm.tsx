@@ -31,7 +31,7 @@ export const LoginForm = () => {
     }
 
     try {
-      const { access_token, user } = await loginRequest({ email, password })
+      const { access_token, user } = await loginRequest({ email, password, rememberMe })
       login(access_token, user, rememberMe)
 
       navigate('/profile')
