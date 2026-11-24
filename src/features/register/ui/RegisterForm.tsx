@@ -1,6 +1,9 @@
 import { Button, Checkbox, Input, Text } from '@/shared/ui'
 import { useState, type SubmitEvent } from 'react'
 import { validateRegisterForm, type RegisterErrors } from '../model/validateRegisterForm'
+import { registerRequest } from '../api/registerRequest'
+import { useNavigate } from 'react-router-dom'
+import { isAxiosError } from 'axios'
 
 
 export const RegisterForm = () => {
@@ -14,6 +17,9 @@ export const RegisterForm = () => {
   const [errors, setErrors] = useState<RegisterErrors>({})
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const navigate = useNavigate()
+
 
   const handleRegister = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -32,8 +38,44 @@ export const RegisterForm = () => {
       setIsSubmitting(false)
       return
     }
+
+    try {
+      const { registeredEmail, resendSeconds } = await registerRequest({
+        firstName,
+        lastName,
+        email,
+        phone,
+        password
+      })
+
+      navigate('/verify', {
+        state: {
+          registeredEmail,
+          resendSeconds,
+          mode: 'register'
+        }
+      })
+    }
+    catch (httpError) {
+      if (isAxiosError(httpError)) {
+        const status = httpError.response?.status
+
+        switch (status) {
+          case 409: setErrors({ email: 'Такой пользователь уже существует' }); break;
+          case 500: setErrors({ firstName: 'Ошибка на сервере, попробуйте снова' }); break;
+          default: setErrors({ firstName: 'Ошибка. Попробуйте еще раз' })
+        }
+      }
+      else {
+        setErrors({ firstName: 'Непредвиденная ошибка. Попробуйте ещё раз' })
+      }
+    }
+    finally {
+      setIsSubmitting(false)
+    }
   }
 
+  
   return (
     <form className="auth-form" onSubmit={handleRegister} noValidate>
       <Input
@@ -71,6 +113,7 @@ export const RegisterForm = () => {
         id="register-phone"
         label="Номер телефона"
         value={phone}
+        type='tel'
         onChange={(e) => {
           setErrors((prev) => ({ ...prev, phone: undefined }))
           setPhone(e.target.value)

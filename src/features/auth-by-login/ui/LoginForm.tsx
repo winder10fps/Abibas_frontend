@@ -46,6 +46,9 @@ export const LoginForm = () => {
           default: setErrors({ email: 'Ошибка. Попробуйте еще раз' })
         }
       }
+      else {
+        setErrors({ email: 'Непредвиденная ошибка. Попробуйте ещё раз' })
+      }
     }
     finally {
       setIsSubmitting(false)
