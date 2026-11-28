@@ -10,13 +10,23 @@ export const RegisterForm = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
+  const [phoneNum, setPhoneNum] = useState('')
   const [password, setPassword] = useState('')
-  const [isAgree, setIsAgree] = useState(false)
+  const [agreeToTerms, setAgreeToTerms] = useState(false)
 
   const [errors, setErrors] = useState<RegisterErrors>({})
+  const [formError, setFormError] = useState<string | null>(null)
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const clearInputs = () => {
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+    setPhoneNum('')
+    setPassword('')
+    setAgreeToTerms(false)
+  }
 
   const navigate = useNavigate()
 
@@ -29,9 +39,9 @@ export const RegisterForm = () => {
       firstName,
       lastName,
       email,
-      phone,
+      phoneNum,
       password,
-      isAgree
+      agreeToTerms
     )
     setErrors(formErrors)
     if (Object.keys(formErrors).length > 0) {
@@ -40,34 +50,33 @@ export const RegisterForm = () => {
     }
 
     try {
-      const { registeredEmail, resendSeconds } = await registerRequest({
+      await registerRequest({
         firstName,
         lastName,
         email,
-        phone,
-        password
+        phoneNum,
+        password,
+        agreeToTerms
       })
 
       navigate('/verify', {
         state: {
-          registeredEmail,
-          resendSeconds,
-          mode: 'register'
+          email: email
         }
       })
     }
     catch (httpError) {
+      clearInputs()
       if (isAxiosError(httpError)) {
-        const status = httpError.response?.status
-
-        switch (status) {
-          case 409: setErrors({ email: 'Такой пользователь уже существует' }); break;
-          case 500: setErrors({ firstName: 'Ошибка на сервере, попробуйте снова' }); break;
-          default: setErrors({ firstName: 'Ошибка. Попробуйте еще раз' })
+        const errorData = httpError.response?.data
+        if (errorData)
+          setFormError(errorData)
+        else {
+          setFormError('Ошибка, попробуйте снова')
         }
       }
       else {
-        setErrors({ firstName: 'Непредвиденная ошибка. Попробуйте ещё раз' })
+        setFormError('Непредвиденная ошибка. Попробуйте ещё раз')
       }
     }
     finally {
@@ -75,9 +84,17 @@ export const RegisterForm = () => {
     }
   }
 
-  
+
   return (
-    <form className="auth-form" onSubmit={handleRegister} noValidate>
+    <form
+      className="auth-form"
+      onSubmit={handleRegister}
+      onChange={() => setFormError(null)}
+      noValidate
+    >
+      {formError &&
+        <Text color='accent' size='micro' className='form-error-text'>{formError}</Text>
+      }
       <Input
         id="register-first-name"
         label="Имя"
@@ -112,11 +129,11 @@ export const RegisterForm = () => {
       <Input
         id="register-phone"
         label="Номер телефона"
-        value={phone}
+        value={phoneNum}
         type='tel'
         onChange={(e) => {
           setErrors((prev) => ({ ...prev, phone: undefined }))
-          setPhone(e.target.value)
+          setPhoneNum(e.target.value)
         }}
         errorMessage={errors.phone}
       />
@@ -134,10 +151,10 @@ export const RegisterForm = () => {
       <Text color='foreground' size='micro'>Используйте 8 и более символов, включая цифры и символы.</Text>
       <Checkbox
         label='Я согласен с Условиями использования и Политикой конфиденциальности.'
-        checked={isAgree}
+        checked={agreeToTerms}
         onChange={(e) => {
           setErrors((prev) => ({ ...prev, agree: undefined }))
-          setIsAgree(e.target.checked)
+          setAgreeToTerms(e.target.checked)
         }}
         errored={Boolean(errors.agree)}
       />
@@ -148,6 +165,6 @@ export const RegisterForm = () => {
       >
         Создать аккаунт →
       </Button>
-    </form>
+    </form >
   )
 }

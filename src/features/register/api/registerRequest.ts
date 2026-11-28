@@ -4,18 +4,18 @@ type RegisterRequest = {
   firstName: string
   lastName: string
   email: string
-  phone: string
+  phoneNum: string
   password: string
+  agreeToTerms: boolean
 }
 
 type RegisterResponse = {
-  registeredEmail: string
-  resendSeconds: number
+  message: string
 }
 
 
 export const registerRequest = async (data: RegisterRequest): Promise<RegisterResponse> => {
-  const response = await api.post<RegisterResponse>('/auth/register', data)
+  const response = await api.post<RegisterResponse>('/auth/register/init', data)
 
   return response.data
 }
