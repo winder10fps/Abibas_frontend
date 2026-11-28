@@ -1,21 +1,34 @@
-const TOKEN_KEY = 'access_token'
+const ACCESS_TOKEN_KEY = 'access_token'
+const REFRESH_TOKEN_KEY = 'refresh_token'
 
 export const tokenStorage = {
-  getToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY)
+  getAccessToken(): string | null {
+    return localStorage.getItem(ACCESS_TOKEN_KEY) || sessionStorage.getItem(ACCESS_TOKEN_KEY)
   },
 
-  setToken(token: string, rememberMe: boolean): void {
-    this.removeToken()
+  getRefreshToken(): string | null {
+    return localStorage.getItem(REFRESH_TOKEN_KEY) || sessionStorage.getItem(REFRESH_TOKEN_KEY)
+  },
+
+  setTokens(access_token: string, refresh_token: string, rememberMe: boolean): void {
+    this.removeTokens()
     if (rememberMe) {
-      localStorage.setItem(TOKEN_KEY, token)
+      localStorage.setItem(ACCESS_TOKEN_KEY, access_token)
+      localStorage.setItem(REFRESH_TOKEN_KEY, refresh_token)
     } else {
-      sessionStorage.setItem(TOKEN_KEY, token)
+      sessionStorage.setItem(ACCESS_TOKEN_KEY, access_token)
+      sessionStorage.setItem(REFRESH_TOKEN_KEY, refresh_token)
     }
   },
 
-  removeToken(): void {
-    localStorage.removeItem(TOKEN_KEY)
-    sessionStorage.removeItem(TOKEN_KEY)
+  isRemembered(): boolean {
+    return Boolean(localStorage.getItem(REFRESH_TOKEN_KEY))
+  },
+
+  removeTokens(): void {
+    localStorage.removeItem(ACCESS_TOKEN_KEY)
+    localStorage.removeItem(REFRESH_TOKEN_KEY)
+    sessionStorage.removeItem(ACCESS_TOKEN_KEY)
+    sessionStorage.removeItem(REFRESH_TOKEN_KEY)
   },
 }

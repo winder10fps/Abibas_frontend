@@ -5,19 +5,16 @@ import { AuthContext } from "./authContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserProfile | null>(null)
-  const [isAuth, setIsAuth] = useState<boolean>(() => Boolean(tokenStorage.getToken()));
+  const [isAuth, setIsAuth] = useState<boolean>(() => Boolean(tokenStorage.getAccessToken()));
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const login = useCallback((token: string, userData: UserProfile, rememberMe: boolean) => {
-    tokenStorage.setToken(token, rememberMe);
+  const loginUser = useCallback((access_token: string, refresh_token: string, rememberMe: boolean) => {
+    tokenStorage.setTokens(access_token, refresh_token, rememberMe);
     setIsAuth(true);
-    if (userData) {
-      setUser(userData);
-    }
   }, []);
 
   const logout = useCallback(() => {
-    tokenStorage.removeToken();
+    tokenStorage.removeTokens();
     setUser(null);
     setIsAuth(false);
   }, []);
@@ -25,7 +22,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // восстановление при загрузке или обновлении
   useEffect(() => {
     const checkAuth = async () => {
-      const token = tokenStorage.getToken();
+      const token = tokenStorage.getAccessToken();
       if (!token) {
         setIsLoading(false);
         return;
@@ -46,7 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [logout]);
 
   return (
-    <AuthContext.Provider value={{ user, isAuth, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ user, isAuth, isLoading, loginUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -8,7 +8,7 @@ import { isAxiosError } from 'axios'
 import { validateLoginForm, type LoginErrors } from '../model/validateLogin'
 
 export const LoginForm = () => {
-  const [email, setEmail] = useState('')
+  const [login, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
 
@@ -16,14 +16,14 @@ export const LoginForm = () => {
 
   const [errors, setErrors] = useState<LoginErrors>({})
 
-  const { login } = useAuth()
+  const { loginUser } = useAuth()
   const navigate = useNavigate()
 
   const handleLogin = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    const formErrors = validateLoginForm(email, password)
+    const formErrors = validateLoginForm(login, password)
     setErrors(formErrors)
     if (Object.keys(formErrors).length > 0) {
       setIsSubmitting(false)
@@ -31,23 +31,22 @@ export const LoginForm = () => {
     }
 
     try {
-      const { access_token, user } = await loginRequest({ email, password, rememberMe })
-      login(access_token, user, rememberMe)
+      const { accessTokenResponse, refreshToken } = await loginRequest({ login, password, rememberMe })
+      loginUser(accessTokenResponse, refreshToken, rememberMe)
 
       navigate('/profile')
     }
     catch (httpError) {
       if (isAxiosError(httpError)) {
-        const status = httpError.response?.status
-
-        switch (status) {
-          case 401: setErrors({ email: 'Неверный логин или пароль' }); break;
-          case 500: setErrors({ email: 'Ошибка на сервере, попробуйте снова' }); break;
-          default: setErrors({ email: 'Ошибка. Попробуйте еще раз' })
+        const errorData = httpError.response?.data
+        if (errorData)
+          setErrors({ login: errorData })
+        else {
+          setErrors({ login: 'Ошибка, попробуйте снова' })
         }
       }
       else {
-        setErrors({ email: 'Непредвиденная ошибка. Попробуйте ещё раз' })
+        setErrors({ login: 'Непредвиденная ошибка. Попробуйте ещё раз' })
       }
     }
     finally {
@@ -59,14 +58,14 @@ export const LoginForm = () => {
     <form className="auth-form" onSubmit={handleLogin} noValidate>
       <Input
         id="login-email"
-        label='Адрес электронной почты'
+        label='Телефон / адрес электронной почты'
         type='email'
-        value={email}
+        value={login}
         onChange={(e) => {
-          setErrors((prev) => ({ ...prev, email: undefined }))
+          setErrors((prev) => ({ ...prev, login: undefined }))
           setEmail(e.target.value)
         }}
-        errorMessage={errors.email}
+        errorMessage={errors.login}
       />
       <Input
         id="login-password"
